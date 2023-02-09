@@ -3,8 +3,7 @@ SELECT
 'ALTER INDEX [ROWID$INDEX] ON [dbo].[' + t.name + '] DISABLE;',
 
 
-
-	 TableName = t.name,
+     TableName = t.name,
      IndexName = ind.name,
      IndexId = ind.index_id,
      ColumnId = ic.index_column_id,
