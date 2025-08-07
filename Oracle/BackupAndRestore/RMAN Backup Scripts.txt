@@ -1,0 +1,34 @@
+-- RUN THIS SCRIPT TO AUTOMATE START A BACKUP AND SAVE IT INTO A PATH.
+
+sql 'alter system archive log current';
+
+RUN
+{
+configure controlfile autobackup on;
+ALLOCATE CHANNEL c1 DEVICE TYPE disk;
+ALLOCATE CHANNEL c2 DEVICE TYPE disk;
+backup database tag DB_FULL format '/home/oracle/DB_BACKUP_%d_%T_%s_%p_FULL' ;
+sql 'alter system archive log current';
+backup tag DB_ARCHIVE format '/home/oracle/%d_%T_%s_%p_ARCHIVE' archivelog all delete all input ;
+backup tag ORCL_CONTROL current controlfile format '/home/oracle/%d_%T_%s_%p_CONTROL';
+release channel c1;
+release channel c2;
+}
+
+quit;
+
+
+vi /home/oracle/backup_full.rman
+
+
+rman target=/ @/home/oracle/backup_full.rman
+
+
+
+
+
+
+
+
+
+
