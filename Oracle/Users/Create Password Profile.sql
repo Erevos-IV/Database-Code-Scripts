@@ -1,0 +1,7 @@
+sqlplus sys/oracle@orcl as sysdba
+
+
+CREATE PROFILE profname LIMIT
+   FAILED_LOGIN_ATTEMPTS 4
+   PASSWORD_LOCK_TIME 2
+   PASSWORD_LIFE_TIME 90;
